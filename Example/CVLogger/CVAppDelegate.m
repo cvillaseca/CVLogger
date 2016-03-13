@@ -8,11 +8,29 @@
 
 #import "CVAppDelegate.h"
 
+
 @implementation CVAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:45.0f/255.0f green:149.0f/206.0f blue:206.0f/255.0f alpha:1]];
+    [[UINavigationBar appearance] setTranslucent:NO];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    UIViewController *mainViewController = [storyboard instantiateInitialViewController];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = mainViewController;
+    [self.window makeKeyAndVisible];
+    
+#ifdef DEBUG
+    self.cvlogger =[[CVLogger alloc] init];
+#endif
+    
+    for (int i = 0; i < 100; i++) {
+        NSLog(@"asdfsadfsadf");
+    }
     return YES;
 }
 

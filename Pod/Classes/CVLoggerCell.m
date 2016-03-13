@@ -1,0 +1,42 @@
+//
+//  CVLoggerCell.m
+//  Pods
+//
+//  Created by Cristian Villaseca on 12/3/16.
+//
+//
+
+#import "CVLoggerCell.h"
+
+@implementation CVLoggerCell
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        
+        self.logLabel = [[UILabel alloc] init];
+        [self.logLabel setTextColor:[UIColor blackColor]];
+        [self.logLabel setNumberOfLines:0];
+        
+        [self.logLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:14.0f]];
+        [self.logLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [self.contentView addSubview:self.logLabel];
+        
+        NSDictionary *views = @{@"logLabel":self.logLabel};
+        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[logLabel]|"
+                                                                       options: 0
+                                                                       metrics:nil
+                                                                         views:views];
+        [self.contentView addConstraints:constraints];
+        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[logLabel]|"
+                                                              options: 0
+                                                              metrics:nil
+                                                                views:views];
+        [self.contentView addConstraints:constraints];
+    }
+    
+    return self;
+}
+
+
+@end

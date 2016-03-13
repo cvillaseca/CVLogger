@@ -1,0 +1,6 @@
+framework module CVLogger {
+  umbrella header "CVLogger-umbrella.h"
+
+  export *
+  module * { export * }
+}

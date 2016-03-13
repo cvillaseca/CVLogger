@@ -19,12 +19,12 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
                        DESC
 
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/CVLogger"
+  s.homepage         = "https://github.com/ravenx88/CVLogger"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "Cristian Villaseca" => "cvillaseca_basco@hotmail.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/CVLogger.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => "https://github.com/ravenx88/CVLogger.git", :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/cristianviba'
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true
@@ -35,6 +35,6 @@ Pod::Spec.new do |s|
   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+  s.frameworks = 'UIKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 end
