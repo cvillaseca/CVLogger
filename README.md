@@ -5,7 +5,9 @@
 [![License](https://img.shields.io/cocoapods/l/CVLogger.svg?style=flat)](http://cocoapods.org/pods/CVLogger)
 [![Platform](https://img.shields.io/cocoapods/p/CVLogger.svg?style=flat)](http://cocoapods.org/pods/CVLogger)
 
-[![](https://cloud.githubusercontent.com/assets/7700085/13728275/5c5f224e-e912-11e5-9d37-b02210ef8a26.gif)
+`CVLogger` is a tool that shows a button over UIWindow (only DEBUG build). When it pushed will show any log printed by NSLog. 
+
+[![](https://cloud.githubusercontent.com/assets/7700085/13728275/5c5f224e-e912-11e5-9d37-b02210ef8a26.gif)]
 
 ## Usage
 
