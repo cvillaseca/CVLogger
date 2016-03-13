@@ -11,7 +11,32 @@
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
+In your AppDelegate.h:
+```objective-c
+#import <CVLogger/CVLogger.h>
+
+@property (strong, nonatomic) CVLogger *cvlogger;
+```
+
+In your AppDelegate.m:
+```objective-c
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+//UIWindow must not be nil before init CVLogger
+#ifdef DEBUG
+    self.cvlogger =[[CVLogger alloc] init];
+#endif
+}
+```
+
 ## Requirements
+
+`CVLogger` works on iOS 7+ and requires ARC to build. It depends on the following Apple frameworks, which should already be included with most Xcode templates:
+
+* Foundation.framework
+* UIKit.framework
+
+You will need the latest developer tools in order to build `CVLogger`. Old Xcode versions might work, but compatibility will not be explicitly maintained.
 
 ## Installation
 
