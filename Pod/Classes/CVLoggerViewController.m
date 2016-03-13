@@ -189,10 +189,10 @@ static NSString *CellIdentifier = @"CustomTableCell";
         str = text;
     }
     
-    CGFloat margin = 8.f;
+    CGFloat margin = 4.f;
     
     //Label font
-    UIFont *aLabelFont = [UIFont systemFontOfSize:15.0];
+    UIFont *aLabelFont = [UIFont systemFontOfSize:14.0];
     
     //Width of the Label
     CGFloat aLabelSizeWidth = self.view.bounds.size.width;

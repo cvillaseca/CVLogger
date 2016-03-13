@@ -28,8 +28,9 @@
         return nil;
     
     self.btLogger = [CVLogButton buttonWithType:UIButtonTypeCustom];
-    self.btLogger.frame = CGRectMake(50, 50, 30, 30);
-    self.btLogger.backgroundColor = [UIColor yellowColor];
+    self.btLogger.frame = CGRectMake(50, 70, 30, 30);
+    self.btLogger.backgroundColor = [UIColor colorWithWhite:.8f alpha:.7f];
+    [self.btLogger setShowsTouchWhenHighlighted:YES];
     [self.btLogger addTarget:self action:@selector(touched:) forControlEvents:UIControlEventTouchUpInside];
     UIWindow* currentWindow = [UIApplication sharedApplication].keyWindow;
     [currentWindow addSubview:self.btLogger];
@@ -38,7 +39,7 @@
 }
 
 -(void) touched:(id) sender {
-    self.btLogger.hidden = YES;
+    
     
     UIWindow* currentWindow = [UIApplication sharedApplication].keyWindow;
     UIViewController *vc = currentWindow.rootViewController;
@@ -49,7 +50,9 @@
     [[UINavigationController alloc] initWithRootViewController:loggerVC];
     
     
-    [vc presentViewController:navigationController animated:YES completion:nil];
+    [vc presentViewController:navigationController animated:YES completion:^{
+        self.btLogger.hidden = YES;
+    }];
 }
 
 #pragma mark - CVLoggerDelegate

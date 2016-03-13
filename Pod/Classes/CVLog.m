@@ -32,12 +32,14 @@ void CVLog(const char *file, int lineNumber, const char *functionName, NSString 
     
     NSString *fileName = [[NSString stringWithUTF8String:file] lastPathComponent];
     
+    NSString *localDate = [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterMediumStyle];
+    
     fprintf(stderr, "(%s) (%s:%d) %s",
-            functionName, [fileName UTF8String],
+            [localDate UTF8String], [fileName UTF8String],
             lineNumber, [body UTF8String]);
     
-    NSString *message = [NSString stringWithFormat:@"(%s) (%s:%d) %s",
-                         functionName, [fileName UTF8String],
+    NSString *message = [NSString stringWithFormat:@"(%@) (%s:%d) %s", localDate
+                         , [fileName UTF8String],
                          lineNumber, [body UTF8String]];
     
     [[CVLogManager sharedManager] addLog:message];

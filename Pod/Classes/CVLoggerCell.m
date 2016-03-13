@@ -23,7 +23,7 @@
         [self.contentView addSubview:self.logLabel];
         
         NSDictionary *views = @{@"logLabel":self.logLabel};
-        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[logLabel]|"
+        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-8-[logLabel]-8-|"
                                                                        options: 0
                                                                        metrics:nil
                                                                          views:views];

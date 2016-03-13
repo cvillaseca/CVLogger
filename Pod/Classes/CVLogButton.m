@@ -12,11 +12,7 @@
 @implementation CVLogButton
 
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
-    // Drawing code
-    self.backgroundColor = [UIColor redColor];
     self.layer.cornerRadius = self.frame.size.width / 2;
     self.layer.masksToBounds = YES;
 }

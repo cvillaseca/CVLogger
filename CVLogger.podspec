@@ -8,15 +8,10 @@
 
 Pod::Spec.new do |s|
   s.name             = "CVLogger"
-  s.version          = "0.2.1"
+  s.version          = "0.2.2"
   s.summary          = "A library to show a log viewer in your app."
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!  
-s.description      = 'This library provides a app log viewer for your debug mode app'
+  s.description      = 'This library provides a app log viewer for your debug mode app'
 
   s.homepage         = "https://github.com/ravenx88/CVLogger"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
@@ -33,7 +28,5 @@ s.description      = 'This library provides a app log viewer for your debug mode
     'CVLogger' => ['Pod/Assets/*.png']
   }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'UIKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end
