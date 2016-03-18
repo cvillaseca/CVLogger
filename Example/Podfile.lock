@@ -1,5 +1,5 @@
 PODS:
-  - CVLogger (0.2.2)
+  - CVLogger (0.2.3)
   - Expecta (1.0.5)
   - Expecta+Snapshots (2.0.0):
     - Expecta (~> 1.0)
@@ -23,7 +23,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CVLogger: b5fab3161d34cbe59a29347e4a5e724bfded432b
+  CVLogger: 2262736457a5d468a0b551fcdd2897dc1989974f
   Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
   Expecta+Snapshots: 29b38dd695bc72a0ed2bea833937d78df41943ba
   FBSnapshotTestCase: 7e85180d0d141a0cf472352edda7e80d7eaeb547
