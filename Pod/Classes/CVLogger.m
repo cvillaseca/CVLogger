@@ -38,11 +38,9 @@
     return self;
 }
 
+#pragma mark - Action senders
+
 -(void) touched:(id) sender {
-    
-    
-    UIWindow* currentWindow = [UIApplication sharedApplication].keyWindow;
-    UIViewController *vc = currentWindow.rootViewController;
     
     CVLoggerViewController *loggerVC = [[CVLoggerViewController alloc] initWithNibName:nil bundle:nil];
     loggerVC.delegate = self;
@@ -50,9 +48,22 @@
     [[UINavigationController alloc] initWithRootViewController:loggerVC];
     
     
-    [vc presentViewController:navigationController animated:YES completion:^{
+    [[self topMostController] presentViewController:navigationController animated:YES completion:^{
         self.btLogger.hidden = YES;
     }];
+}
+
+#pragma mark - Private methods
+
+- (UIViewController*) topMostController
+{
+    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    
+    while (topController.presentedViewController) {
+        topController = topController.presentedViewController;
+    }
+    
+    return topController;
 }
 
 #pragma mark - CVLoggerDelegate
@@ -63,3 +74,4 @@
 
 
 @end
+
