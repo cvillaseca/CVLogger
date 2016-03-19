@@ -17,6 +17,10 @@
     self.layer.masksToBounds = YES;
 }
 
+-(void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    self.backgroundColor = [UIColor colorWithWhite:.8f alpha:.4f];
+}
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     
@@ -38,6 +42,15 @@
 
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 4 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:0.3 animations:^{
+            self.backgroundColor = [UIColor colorWithWhite:.6f alpha:.7f];
+        }];
+        
+    });
+    
+    
 }
 
 @end

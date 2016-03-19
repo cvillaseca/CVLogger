@@ -8,11 +8,10 @@
 
 #import "CVLogger.h"
 
-
 #import "CVLogButton.h"
 #import "CVLoggerViewController.h"
 
-
+#define COLLAPSE_HEIGHT 150
 
 @interface CVLogger () <CVLoggerDelegate>
 
@@ -26,10 +25,10 @@
 -(instancetype)init{
     if (!(self = [super init]))
         return nil;
-    
+    self.collapseHeight = COLLAPSE_HEIGHT;
     self.btLogger = [CVLogButton buttonWithType:UIButtonTypeCustom];
-    self.btLogger.frame = CGRectMake(50, 70, 30, 30);
-    self.btLogger.backgroundColor = [UIColor colorWithWhite:.8f alpha:.7f];
+    self.btLogger.frame = CGRectMake(50, 70, 40, 40);
+    self.btLogger.backgroundColor = [UIColor colorWithWhite:.6f alpha:.7f];
     [self.btLogger setShowsTouchWhenHighlighted:YES];
     [self.btLogger addTarget:self action:@selector(touched:) forControlEvents:UIControlEventTouchUpInside];
     UIWindow* currentWindow = [UIApplication sharedApplication].keyWindow;
@@ -43,6 +42,7 @@
 -(void) touched:(id) sender {
     
     CVLoggerViewController *loggerVC = [[CVLoggerViewController alloc] initWithNibName:nil bundle:nil];
+    loggerVC.collapseHeight = self.collapseHeight;
     loggerVC.delegate = self;
     UINavigationController *navigationController =
     [[UINavigationController alloc] initWithRootViewController:loggerVC];

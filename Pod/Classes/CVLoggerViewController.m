@@ -12,6 +12,7 @@
 #import "CVLogManager.h"
 
 #define MAX_LENGTH 15000
+#define COLAPSE_HEIGHT 150
 
 static NSString *CellIdentifier = @"CustomTableCell";
 
@@ -25,12 +26,16 @@ static NSString *CellIdentifier = @"CustomTableCell";
 @property (nonatomic, strong) NSArray *logs;
 @property (nonatomic, strong) NSArray *searchLogs;
 
+@property (nonatomic) NSInteger selectedCell;
+
 @end
 
 @implementation CVLoggerViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.selectedCell = -1;
     
     NSString *bundlePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"CVLogger" ofType:@"bundle"];
     NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
@@ -47,15 +52,16 @@ static NSString *CellIdentifier = @"CustomTableCell";
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItems = @[closeButton,shareButton];
-    self.navigationItem.leftBarButtonItem = deleteButton;
-
+    self.navigationItem.leftBarButtonItem = deleteButton;    
     
     [self configureView];
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -63,6 +69,7 @@ static NSString *CellIdentifier = @"CustomTableCell";
     self.logs = [[CVLogManager sharedManager] getLogs];;
     [self.tableView reloadData];
 }
+
 
 #pragma mark - UITableViewDelegate
 
@@ -75,14 +82,25 @@ static NSString *CellIdentifier = @"CustomTableCell";
     }
 }
 
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSString *text = nil;
     if (tableView == self.searchController.searchResultsTableView) {
-        return [self heightForText:self.searchLogs[indexPath.row]];
+        text = self.searchLogs[indexPath.row];
     } else {
-        return [self heightForText:self.logs[indexPath.row]];
+        text = self.logs[indexPath.row];
     }
+    
+    if (indexPath.row == self.selectedCell) {
+        return [self heightForText:text];
+    }else {
+        return MIN(self.collapseHeight, [self heightForText:text]);
+    }
+    
+    
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -111,6 +129,28 @@ static NSString *CellIdentifier = @"CustomTableCell";
     return cell;
 }
 
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.selectedCell = indexPath.row;
+    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
 #pragma mark - SearchDisplayController
 
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
@@ -125,8 +165,6 @@ static NSString *CellIdentifier = @"CustomTableCell";
             
         });
     });
-    
-    
 }
 
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
@@ -224,13 +262,13 @@ static NSString *CellIdentifier = @"CustomTableCell";
 
 -(void) share:(id) sender {
     
-//    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-//    
-//    NSString *log = self.logs[indexPath.row];
-//    
-//    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[log]applicationActivities:nil];
-//    activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll]; //Exclude whichever aren't relevant
-//    [self presentViewController:activityVC animated:YES completion:nil];
+    //    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    //
+    //    NSString *log = self.logs[indexPath.row];
+    //
+    //    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[log]applicationActivities:nil];
+    //    activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll]; //Exclude whichever aren't relevant
+    //    [self presentViewController:activityVC animated:YES completion:nil];
     
     NSMutableString *logs = [[NSMutableString alloc] init];
     for (NSString *log in self.logs) {
@@ -243,14 +281,14 @@ static NSString *CellIdentifier = @"CustomTableCell";
     NSError *error;
     NSString *path = [documentsDirectory stringByAppendingPathComponent:@"logs.txt"];
     BOOL succeed = [logs writeToFile: path
-                              atomically:YES encoding:NSUTF8StringEncoding error:&error];
+                          atomically:YES encoding:NSUTF8StringEncoding error:&error];
     if (succeed){
         NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:path];
         UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[fileURL] applicationActivities:nil];
         [self presentViewController:activityVC animated:YES completion:nil];
     }
     
-
+    
 }
 
 -(void) delete:(id) sender {

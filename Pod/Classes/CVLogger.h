@@ -14,5 +14,7 @@
 
 @interface CVLogger : NSObject
 
+@property (nonatomic) NSInteger collapseHeight;
+
 
 @end

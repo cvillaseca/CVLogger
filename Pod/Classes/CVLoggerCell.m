@@ -28,7 +28,7 @@
                                                                        metrics:nil
                                                                          views:views];
         [self.contentView addConstraints:constraints];
-        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[logLabel]|"
+        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-4-[logLabel]-4-|"
                                                               options: 0
                                                               metrics:nil
                                                                 views:views];

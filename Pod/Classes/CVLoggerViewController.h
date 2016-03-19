@@ -16,6 +16,8 @@
 
 @interface CVLoggerViewController : UIViewController
 
+@property (nonatomic) NSInteger collapseHeight;
+
 @property (nonatomic, weak) id <CVLoggerDelegate> delegate;
 
 @end
