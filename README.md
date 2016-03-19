@@ -1,6 +1,6 @@
 # CVLogger
 
-[![CI Status](http://img.shields.io/travis/Cristian Villaseca/CVLogger.svg?style=flat)](https://travis-ci.org/Cristian Villaseca/CVLogger)
+[![CI Status](http://img.shields.io/travis/cvillaseca/CVLogger.svg?style=flat)](https://travis-ci.org/cvillaseca/CVLogger)
 [![Version](https://img.shields.io/cocoapods/v/CVLogger.svg?style=flat)](http://cocoapods.org/pods/CVLogger)
 [![License](https://img.shields.io/cocoapods/l/CVLogger.svg?style=flat)](http://cocoapods.org/pods/CVLogger)
 [![Platform](https://img.shields.io/cocoapods/p/CVLogger.svg?style=flat)](http://cocoapods.org/pods/CVLogger)
