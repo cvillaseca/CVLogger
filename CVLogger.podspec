@@ -1,20 +1,14 @@
-#
-# Be sure to run `pod lib lint CVLogger.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
+
 
 Pod::Spec.new do |s|
   s.name             = "CVLogger"
-  s.version          = "0.2.3"
-  s.summary          = "A library to show a log viewer in your app."
+  s.version          = "0.3"
+  s.summary          = "A library to show easily a log viewer in your app."
 
   s.description      = 'This library provides a app log viewer for your debug mode app'
 
   s.homepage         = "https://github.com/ravenx88/CVLogger"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.screenshots      = "https://cloud.githubusercontent.com/assets/7700085/13728275/5c5f224e-e912-11e5-9d37-b02210ef8a26.gif"
   s.license          = 'MIT'
   s.author           = { "Cristian Villaseca" => "cvillaseca_basco@hotmail.com" }
   s.source           = { :git => "https://github.com/ravenx88/CVLogger.git", :tag => s.version.to_s }
