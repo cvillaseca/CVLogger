@@ -111,16 +111,28 @@ static NSString *CellIdentifier = @"CustomTableCell";
         cell = [[CVLoggerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    NSString *recipe = nil;
+    NSString  *recipe = nil;
     if (tableView == self.searchController.searchResultsTableView) {
         recipe = [self.searchLogs objectAtIndex:indexPath.row];
+        
+        NSRange range = [[recipe lowercaseString] rangeOfString:[self.searchBar.text lowercaseString]];
+        
+        NSMutableAttributedString *attributedRecipe = [[NSMutableAttributedString alloc] initWithString:recipe];
+        [attributedRecipe addAttributes:@{NSBackgroundColorAttributeName:[UIColor greenColor]} range:range];
+
+        
+        cell.logLabel.attributedText = attributedRecipe;
+        
+        return cell;
+        
     } else {
         recipe = [self.logs objectAtIndex:indexPath.row];
     }
     
     
+    
     if( [recipe length] > MAX_LENGTH ){
-        recipe = [recipe substringToIndex:MAX_LENGTH ];
+        recipe = [recipe substringToIndex:MAX_LENGTH];
     }
     
     
@@ -177,6 +189,7 @@ static NSString *CellIdentifier = @"CustomTableCell";
     
     return YES;
 }
+
 
 #pragma mark - Private methods
 
