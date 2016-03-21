@@ -27,9 +27,7 @@
         return nil;
     self.collapseHeight = COLLAPSE_HEIGHT;
     self.btLogger = [CVLogButton buttonWithType:UIButtonTypeCustom];
-    self.btLogger.frame = CGRectMake(50, 70, 40, 40);
-    self.btLogger.backgroundColor = [UIColor colorWithWhite:.6f alpha:.7f];
-    [self.btLogger setShowsTouchWhenHighlighted:YES];
+
     [self.btLogger addTarget:self action:@selector(touched:) forControlEvents:UIControlEventTouchUpInside];
     UIWindow* currentWindow = [UIApplication sharedApplication].keyWindow;
     [currentWindow addSubview:self.btLogger];
