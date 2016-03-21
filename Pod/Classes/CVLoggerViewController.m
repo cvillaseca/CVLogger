@@ -118,7 +118,8 @@ static NSString *CellIdentifier = @"CustomTableCell";
         NSRange range = [[recipe lowercaseString] rangeOfString:[self.searchBar.text lowercaseString]];
         
         NSMutableAttributedString *attributedRecipe = [[NSMutableAttributedString alloc] initWithString:recipe];
-        [attributedRecipe addAttributes:@{NSBackgroundColorAttributeName:[UIColor greenColor]} range:range];
+        NSDictionary *attributes =@{NSBackgroundColorAttributeName:[UIColor colorWithRed:245.0/255.0 green:228.0/255.0 blue:55.0/255.0 alpha:1]};
+        [attributedRecipe addAttributes:attributes range:range];
 
         
         cell.logLabel.attributedText = attributedRecipe;
