@@ -11,6 +11,36 @@
 
 @implementation CVLogButton
 
+-(instancetype)init {
+    if (!(self = [super init])) {
+        return nil;
+    }
+    [self commonInit];
+    return self;
+}
+
+-(instancetype)initWithCoder:(NSCoder *)aDecoder{
+    if (!(self = [super initWithCoder:aDecoder])) {
+        return nil;
+    }
+    [self commonInit];
+    return self;
+}
+
+-(instancetype)initWithFrame:(CGRect)frame {
+    if (!(self = [super initWithFrame:frame])) {
+        return nil;
+    }
+    [self commonInit];
+    return self;
+}
+
+-(void) commonInit {
+    self.frame = CGRectMake(50, 70, 40, 40);
+    self.backgroundColor = [UIColor colorWithWhite:.6f alpha:.7f];
+    [self setShowsTouchWhenHighlighted:YES];
+    [self setTransparentWithAnimation];
+}
 
 - (void)drawRect:(CGRect)rect {
     self.layer.cornerRadius = self.frame.size.width / 2;
@@ -19,7 +49,7 @@
 
 -(void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
-    self.backgroundColor = [UIColor colorWithWhite:.8f alpha:.4f];
+    self.backgroundColor = [UIColor colorWithWhite:.6f alpha:.7f];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -43,14 +73,17 @@
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
     
+    [self setTransparentWithAnimation];
+    
+}
+
+-(void) setTransparentWithAnimation {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 4 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:0.3 animations:^{
-            self.backgroundColor = [UIColor colorWithWhite:.6f alpha:.7f];
+            self.backgroundColor = [UIColor colorWithWhite:.8f alpha:.4f];
         }];
         
     });
-    
-    
 }
 
 @end
