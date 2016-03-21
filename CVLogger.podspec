@@ -2,7 +2,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "CVLogger"
-  s.version          = "0.3"
+  s.version          = "0.3.1"
   s.summary          = "A library to show easily a log viewer in your app."
 
   s.description      = 'This library provides a app log viewer for your debug mode app'
