@@ -7,9 +7,9 @@
 
 `CVLogger` is a tool that shows a button over UIWindow (only DEBUG build). When it pushed will show any log printed by NSLog. 
 
-![screenshot](https://cloud.githubusercontent.com/assets/7700085/13728275/5c5f224e-e912-11e5-9d37-b02210ef8a26.gif)
+![screenshot](https://cloud.githubusercontent.com/assets/7700085/13935542/24e260c2-efb8-11e5-8fb6-72b1292e3340.gif)
 
-[Show Appetize.io DEMO](https://appetize.io/app/hyumcwx5j5tdm0eq7jd53hauvw)
+[Show Appetize.io DEMO](https://appetize.io/app/kuz81bjqm91ucwzmtgeqpk55kc?device=iphone5s&scale=75&orientation=portrait&osVersion=9.2)
 
 ## Usage
 
