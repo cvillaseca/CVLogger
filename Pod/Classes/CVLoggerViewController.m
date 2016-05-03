@@ -66,8 +66,17 @@ static NSString *CellIdentifier = @"CustomTableCell";
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.logs = [[CVLogManager sharedManager] getLogs];;
-    [self.tableView reloadData];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        self.logs = [[[[CVLogManager sharedManager] getLogs] reverseObjectEnumerator] allObjects];
+        dispatch_async( dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    });
 }
 
 
@@ -110,6 +119,8 @@ static NSString *CellIdentifier = @"CustomTableCell";
     if (!cell) {
         cell = [[CVLoggerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    
+    cell.backgroundColor = (indexPath.row % 2 == 1)?[[[UINavigationBar appearance] barTintColor] colorWithAlphaComponent:0.5]:[UIColor colorWithWhite:1 alpha:1];
     
     NSString  *recipe = nil;
     if (tableView == self.searchController.searchResultsTableView) {
@@ -188,7 +199,7 @@ static NSString *CellIdentifier = @"CustomTableCell";
                                       objectAtIndex:[controller.searchBar
                                                      selectedScopeButtonIndex]]];
     
-    return YES;
+    return NO;
 }
 
 
