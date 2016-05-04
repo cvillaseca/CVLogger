@@ -37,7 +37,5 @@ void CVLog(const char *file, int lineNumber, const char *functionName, NSString 
                          lineNumber, [body UTF8String]];
     
     [[CVLogManager sharedManager] addLog:message];
-
-
 }
 

@@ -8,6 +8,7 @@
 
 #import "CVLogButton.h"
 
+#define kButtonMargin 5.0f
 
 @implementation CVLogButton
 
@@ -57,21 +58,44 @@
     UITouch *touch = [[event allTouches] anyObject];
     UIWindow* currentWindow = [UIApplication sharedApplication].keyWindow;
     CGPoint touchLocation = [touch locationInView:currentWindow];
-    
-    CGRect screenLimit = [[UIScreen mainScreen] bounds];
-    
-    if ((touchLocation.x + self.frame.size.width) < screenLimit.size.width &&
-        (touchLocation.y + self.frame.size.height) < screenLimit.size.height &&
-        touchLocation.x - self.frame.size.width > 0 &&
-        touchLocation.y - self.frame.size.height > 0) {
-        self.center = touchLocation;
-    }
-    
+    self.center = touchLocation;
+
     [self touchesCancelled:touches withEvent:event];
 }
 
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
+    
+    CGRect frame = self.frame;
+    CGRect screenLimit = [[UIScreen mainScreen] bounds];
+    BOOL change = NO;
+    
+    if (self.frame.origin.x < kButtonMargin) {
+        change = YES;
+        frame.origin.x = kButtonMargin;
+    }
+    
+    if (self.frame.origin.y < kButtonMargin) {
+        change = YES;
+        frame.origin.y = kButtonMargin;
+    }
+    
+    if (self.frame.origin.x + self.frame.size.width > screenLimit.size.width - kButtonMargin ) {
+        change = YES;
+        frame.origin.x = screenLimit.size.width - kButtonMargin - frame.size.width ;
+        
+    }
+    
+    if (self.frame.origin.y + self.frame.size.height > screenLimit.size.height - kButtonMargin ) {
+        change = YES;
+        frame.origin.y = screenLimit.size.height - kButtonMargin - frame.size.height ;
+    }
+    
+    if (change) {
+        [UIView animateWithDuration:0.6 animations:^{
+            self.frame = frame;
+        }];
+    }
     
     [self setTransparentWithAnimation];
     

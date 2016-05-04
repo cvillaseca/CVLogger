@@ -11,7 +11,7 @@
 #import "CVLogButton.h"
 #import "CVLoggerViewController.h"
 
-#define COLLAPSE_HEIGHT 150
+#define kCollapseHeight 150
 
 @interface CVLogger () <CVLoggerDelegate>
 
@@ -22,10 +22,11 @@
 @implementation CVLogger
 
 
--(instancetype)init{
+-(instancetype)init {
     if (!(self = [super init]))
         return nil;
-    self.collapseHeight = COLLAPSE_HEIGHT;
+    
+    self.collapseHeight = kCollapseHeight;
     self.btLogger = [CVLogButton buttonWithType:UIButtonTypeCustom];
 
     [self.btLogger addTarget:self action:@selector(touched:) forControlEvents:UIControlEventTouchUpInside];
@@ -38,13 +39,12 @@
 #pragma mark - Action senders
 
 -(void) touched:(id) sender {
-    
+
     CVLoggerViewController *loggerVC = [[CVLoggerViewController alloc] initWithNibName:nil bundle:nil];
     loggerVC.collapseHeight = self.collapseHeight;
     loggerVC.delegate = self;
     UINavigationController *navigationController =
     [[UINavigationController alloc] initWithRootViewController:loggerVC];
-    
     
     [[self topMostController] presentViewController:navigationController animated:YES completion:^{
         self.btLogger.hidden = YES;
@@ -53,8 +53,8 @@
 
 #pragma mark - Private methods
 
-- (UIViewController*) topMostController
-{
+- (UIViewController*) topMostController {
+    
     UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
     
     while (topController.presentedViewController) {
