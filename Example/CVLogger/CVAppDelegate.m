@@ -31,6 +31,7 @@
     for (int i = 0; i < 10; i++) {
         NSLog(@"Lorem ipsum dolor sit amet, at ridiculus fringilla tristique, ante commodo sed, commodo condimentum turpis, quam euismod praesent tincidunt. Erat vestibulum dui auctor dictumst sem in, ullamcorper sed morbi magna et suscipit dolore, consequatur ante laoreet, nisl eget. Sociis libero et sed euismod. Quis dictum lacus in quam, est duis integer pede facilisis mauris. In nec egestas lorem in morbi platea, enim aliquam consequat, cursus saepe blanditiis, ut risus malesuada quisque ornare ornare iaculis. Adipiscing dolor sed sed ut netus, ut at aenean interdum. Ligula sed adipiscing, adipiscing nisl pede eget adipisicing mauris proin, ac quam dui suspendisse diam ultrices massa. A a odio volutpat auctor.");
     }
+    NSLog(@"last log entry");
     return YES;
 }
 

@@ -11,8 +11,7 @@
 #import "CVLoggerCell.h"
 #import "CVLogManager.h"
 
-#define MAX_LENGTH 15000
-#define COLAPSE_HEIGHT 150
+#define kMaxLength 15000
 
 static NSString *CellIdentifier = @"CustomTableCell";
 
@@ -66,8 +65,17 @@ static NSString *CellIdentifier = @"CustomTableCell";
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.logs = [[CVLogManager sharedManager] getLogs];;
-    [self.tableView reloadData];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        self.logs = [[[[CVLogManager sharedManager] getLogs] reverseObjectEnumerator] allObjects];
+        dispatch_async( dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    });
 }
 
 
@@ -111,6 +119,8 @@ static NSString *CellIdentifier = @"CustomTableCell";
         cell = [[CVLoggerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
+    cell.backgroundColor = (indexPath.row % 2 == 1)?[[[UINavigationBar appearance] barTintColor] colorWithAlphaComponent:0.5]:[UIColor colorWithWhite:1 alpha:1];
+    
     NSString  *recipe = nil;
     if (tableView == self.searchController.searchResultsTableView) {
         recipe = [self.searchLogs objectAtIndex:indexPath.row];
@@ -132,8 +142,8 @@ static NSString *CellIdentifier = @"CustomTableCell";
     
     
     
-    if( [recipe length] > MAX_LENGTH ){
-        recipe = [recipe substringToIndex:MAX_LENGTH];
+    if( [recipe length] > kMaxLength ){
+        recipe = [recipe substringToIndex:kMaxLength];
     }
     
     
@@ -188,7 +198,7 @@ static NSString *CellIdentifier = @"CustomTableCell";
                                       objectAtIndex:[controller.searchBar
                                                      selectedScopeButtonIndex]]];
     
-    return YES;
+    return NO;
 }
 
 
@@ -235,18 +245,16 @@ static NSString *CellIdentifier = @"CustomTableCell";
     
     NSString *str = nil;
     
-    if( [text length] > MAX_LENGTH ){
-        str = [text substringToIndex:MAX_LENGTH ];
+    if( [text length] > kMaxLength ){
+        str = [text substringToIndex:kMaxLength ];
     }else {
         str = text;
     }
     
     CGFloat margin = 4.f;
     
-    //Label font
     UIFont *aLabelFont = [UIFont systemFontOfSize:14.0];
     
-    //Width of the Label
     CGFloat aLabelSizeWidth = self.view.bounds.size.width;
     
     CGFloat textHeight = [str boundingRectWithSize:CGSizeMake(aLabelSizeWidth, MAXFLOAT)
@@ -275,14 +283,6 @@ static NSString *CellIdentifier = @"CustomTableCell";
 }
 
 -(void) share:(id) sender {
-    
-    //    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    //
-    //    NSString *log = self.logs[indexPath.row];
-    //
-    //    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[log]applicationActivities:nil];
-    //    activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll]; //Exclude whichever aren't relevant
-    //    [self presentViewController:activityVC animated:YES completion:nil];
     
     NSMutableString *logs = [[NSMutableString alloc] init];
     for (NSString *log in self.logs) {

@@ -15,11 +15,11 @@
     if (self) {
         
         self.logLabel = [[UILabel alloc] init];
-        [self.logLabel setTextColor:[UIColor blackColor]];
-        [self.logLabel setNumberOfLines:0];
+        self.logLabel.textColor = [UIColor blackColor];
+        self.logLabel.numberOfLines = 0;
         
-        [self.logLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:14.0f]];
-        [self.logLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+        self.logLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
+        self.logLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:self.logLabel];
         
         NSDictionary *views = @{@"logLabel":self.logLabel};
